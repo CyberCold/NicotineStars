@@ -7,81 +7,37 @@
     <link rel="stylesheet" href="design.css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const searchBar = document.querySelector('.search-bar'); 
+            const cart = document.querySelector('.cart'); 
+            const heart = document.querySelector('.heart'); 
+            const account = document.querySelector('.account'); 
 
-    // Флаг для отслеживания состояния сайдбара
-    let isSidebarOpen = false;
+            let isSidebarOpen = false;
+            let searchOpen = false;
+            let cartOpen = false;
 
-    // Обработчик клика по кнопке
-    menuToggle.addEventListener('click', function() {
-        if (isSidebarOpen) {
-            sidebar.classList.remove('active');
-        } else {
-            sidebar.classList.add('active');
-        }
-
-        isSidebarOpen = !isSidebarOpen;
-    });
-
-    // Закрытие сайдбара при клике вне его области
-    document.addEventListener('click', function(event) {
-        if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
-            sidebar.classList.remove('active');
-            isSidebarOpen = false;
-        }
-    });
-});
-            document.addEventListener('click', function (event) {
-                if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                    menu.classList.remove('active');
-                    menuOpen = false;
-                }
-                if (!searchBar.contains(event.target) && event.target !== document.querySelector('.search')) {
-                    searchBar.style.display = 'none';
-                    searchOpen = false;
-                }
-                if (!cart.contains(event.target) && event.target !== document.querySelector('.cart-icon')) {
-                    cart.style.display = 'none';
-                    cartOpen = false;
-                }
-                if (!heart.contains(event.target) && event.target !== document.querySelector('.heart')) {
-                    heart.classList.remove('active');
-                }
-                if (!account.contains(event.target) && event.target !== document.querySelector('.account')) {
-                    account.classList.remove('active');
-                }
-                
+            menuToggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                sidebar.classList.toggle('active');
+                isSidebarOpen = !isSidebarOpen;
             });
 
             document.querySelector('.search').addEventListener('click', function (event) {
                 event.stopPropagation();
-                if (!searchOpen) {
-                    searchBar.style.display = 'block';
-                    searchOpen = true;
-                    if (cartOpen) {
-                        cart.style.display = 'none';
-                        cartOpen = false;
-                    }
-                } else {
-                    searchBar.style.display = 'none';
-                    searchOpen = false;
-                }
+                searchBar.style.display = searchOpen ? 'none' : 'block';
+                searchOpen = !searchOpen;
+                cart.style.display = 'none';
+                cartOpen = false;
             });
 
             document.querySelector('.cart-icon').addEventListener('click', function (event) {
                 event.stopPropagation();
-                if (!cartOpen) {
-                    cart.style.display = 'block';
-                    cartOpen = true;
-                    if (searchOpen) {
-                        searchBar.style.display = 'none';
-                        searchOpen = false;
-                    }
-                } else {
-                    cart.style.display = 'none';
-                    cartOpen = false;
-                }
+                cart.style.display = cartOpen ? 'none' : 'block';
+                cartOpen = !cartOpen;
+                searchBar.style.display = 'none';
+                searchOpen = false;
             });
 
             heart.addEventListener('click', function (event) {
@@ -89,24 +45,45 @@
                 heart.classList.toggle('active');
             });
 
-            account.addEventListener('click', function (event) {
+            account.addEventListener('click', function () {
                 window.location.href = "User.html";
             });
+
+            document.addEventListener('click', function (event) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                    isSidebarOpen = false;
+                }
+                if (!searchBar.contains(event.target) && !event.target.closest('.search')) {
+                    searchBar.style.display = 'none';
+                    searchOpen = false;
+                }
+                if (!cart.contains(event.target) && !event.target.closest('.cart-icon')) {
+                    cart.style.display = 'none';
+                    cartOpen = false;
+                }
+                if (!heart.contains(event.target) && !event.target.closest('.heart')) {
+                    heart.classList.remove('active');
+                }
+                if (!account.contains(event.target) && !event.target.closest('.account')) {
+                    account.classList.remove('active');
+                }
+            });
+        });
     </script>
 </head>
 <body>
-    <sticky-header>
-        <header>
-            <div class="top-part">
-                <ul>
-                    <div class="menu-toggle" role="button" aria-label="Toggle Sidebar">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                
+    <header>
+        <div class="top-part">
+            <ul>
+                <div class="menu-toggle" role="button" aria-label="Toggle Sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            
                 <div class="logo">Nicotine Stars</div>
-                
+            
                 <div class="icons">
                     <div class="search">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -117,16 +94,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
                               <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
                        </svg>
-                       </div>
-                        <div class="account">
-                         <a href="User.html">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                             </svg>
-                            </a>
-                      </div>
-                  </div>
-                </ul>
+                    </div>
+                    <div class="account">
+                        <a href="User.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </ul>
                 <nav class="header__inline-menu">
                     <ul class="bottom_menu">
                     <div class="tmenu_wrapper">
@@ -302,7 +279,6 @@
                                 </div>
                             </div>
                     </div>
-                </div>
                 <div class="Snus">
                     <div class="product">
                             <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
@@ -318,7 +294,6 @@
                                 </div>
                             </div>
                     </div>
-                </div>
                 <div class="Snus">
                     <div class="product">
                             <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
