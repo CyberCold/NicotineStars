@@ -98,23 +98,15 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Скрипт загружен, готовы к обработке отправки формы!");
     
         // Код для перенаправления на страницу с результатами поиска
-        searchForm.addEventListener('submit', function (event) {
+        searchButton.addEventListener('click', function (event) {
             event.preventDefault();  // Предотвращаем стандартное поведение формы
-    
-            const query = searchInput.value.trim();  // Получаем запрос из поля (с удалением лишних пробелов)
-    
-            // Логируем запрос
-            console.log('Поиск начат. Запрос: ', query);
-    
+            const query = searchInput.value;  // Получаем запрос из поля
             if (query) {
-                // Если запрос не пустой, переходим на новую страницу
-                console.log('Переход на страницу result.html');
-                window.location.href = `.data/result.html?q=${encodeURIComponent(query)}`;
-            } else {
-                // Логируем, если запрос пустой
-                console.log('Запрос пустой, редирект не происходит');
+                console.log(`Redirecting to: data/result.html?q=${encodeURIComponent(query)}`);  // Логируем URL
+                window.location.href = `data/result.html?q=${encodeURIComponent(query)}`;
             }
         });
+        
     });
     
     
