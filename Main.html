@@ -6,38 +6,78 @@
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+       document.addEventListener('DOMContentLoaded', function () {
+            const menu = document.querySelector('.sidebar');
             const menuToggle = document.querySelector('.menu-toggle');
-            const sidebar = document.querySelector('.sidebar');
-            const searchBar = document.querySelector('.search-bar'); 
-            const cart = document.querySelector('.cart'); 
-            const heart = document.querySelector('.heart'); 
-            const account = document.querySelector('.account'); 
+            const searchBar = document.querySelector('.search-bar');
+            const cart = document.querySelector('.cart');
+            const heart = document.querySelector('.heart');
+            const account = document.querySelector('.account');
 
-            let isSidebarOpen = false;
+            let menuOpen = false;
             let searchOpen = false;
             let cartOpen = false;
 
-            menuToggle.addEventListener('click', function(event) {
+            menuToggle.addEventListener('click', function (event) {
+                if (menuOpen) {
+                    menu.classList.remove('active');
+                } else {
+                    menu.classList.add('active');
+                }
+                menuOpen = !menuOpen;
                 event.stopPropagation();
-                sidebar.classList.toggle('active');
-                isSidebarOpen = !isSidebarOpen;
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                    menu.classList.remove('active');
+                    menuOpen = false;
+                }
+                if (!searchBar.contains(event.target) && event.target !== document.querySelector('.search')) {
+                    searchBar.style.display = 'none';
+                    searchOpen = false;
+                }
+                if (!cart.contains(event.target) && event.target !== document.querySelector('.cart-icon')) {
+                    cart.style.display = 'none';
+                    cartOpen = false;
+                }
+                if (!heart.contains(event.target) && event.target !== document.querySelector('.heart')) {
+                    heart.classList.remove('active');
+                }
+                if (!account.contains(event.target) && event.target !== document.querySelector('.account')) {
+                    account.classList.remove('active');
+                }
+                
             });
 
             document.querySelector('.search').addEventListener('click', function (event) {
                 event.stopPropagation();
-                searchBar.style.display = searchOpen ? 'none' : 'block';
-                searchOpen = !searchOpen;
-                cart.style.display = 'none';
-                cartOpen = false;
+                if (!searchOpen) {
+                    searchBar.style.display = 'block';
+                    searchOpen = true;
+                    if (cartOpen) {
+                        cart.style.display = 'none';
+                        cartOpen = false;
+                    }
+                } else {
+                    searchBar.style.display = 'none';
+                    searchOpen = false;
+                }
             });
 
             document.querySelector('.cart-icon').addEventListener('click', function (event) {
                 event.stopPropagation();
-                cart.style.display = cartOpen ? 'none' : 'block';
-                cartOpen = !cartOpen;
-                searchBar.style.display = 'none';
-                searchOpen = false;
+                if (!cartOpen) {
+                    cart.style.display = 'block';
+                    cartOpen = true;
+                    if (searchOpen) {
+                        searchBar.style.display = 'none';
+                        searchOpen = false;
+                    }
+                } else {
+                    cart.style.display = 'none';
+                    cartOpen = false;
+                }
             });
 
             heart.addEventListener('click', function (event) {
@@ -45,33 +85,12 @@
                 heart.classList.toggle('active');
             });
 
-            account.addEventListener('click', function () {
+            account.addEventListener('click', function (event) {
                 window.location.href = "User.html";
-            });
-
-            document.addEventListener('click', function (event) {
-                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                    isSidebarOpen = false;
-                }
-                if (!searchBar.contains(event.target) && !event.target.closest('.search')) {
-                    searchBar.style.display = 'none';
-                    searchOpen = false;
-                }
-                if (!cart.contains(event.target) && !event.target.closest('.cart-icon')) {
-                    cart.style.display = 'none';
-                    cartOpen = false;
-                }
-                if (!heart.contains(event.target) && !event.target.closest('.heart')) {
-                    heart.classList.remove('active');
-                }
-                if (!account.contains(event.target) && !event.target.closest('.account')) {
-                    account.classList.remove('active');
-                }
             });
         });
     </script>
-</head>
+    </head>
 <body>
     <header>
         <div class="top-part">
