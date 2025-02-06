@@ -328,10 +328,11 @@ a{
     .top_menu_hr {
         position: fixed;
         width: 100000%;
-        height: 10%;
+        height: 12%;
         background: white;
         margin: -100px -100px;
         border: 1px solid #ddd;
+        z-index: 9;
     }
 }
 
@@ -413,7 +414,7 @@ a{
     .top_menu_hr {
         position: fixed;
         width: 100000%;
-        height: 130px;
+        height: 150px;
         background: white;
         margin: 0px -100px;
         border: 1px solid #ddd;
