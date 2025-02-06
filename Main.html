@@ -2,104 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
-    <script >
-        
-       document.addEventListener('DOMContentLoaded', function () {
-
-            const menu = document.querySelector('.sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const searchBar = document.querySelector('.search-bar');
-            const cart = document.querySelector('.cart');
-            const heart = document.querySelector('.heart');
-            const account = document.querySelector('.account');
-
-            let menuOpen = false;
-            let searchOpen = false;
-            let cartOpen = false;
-
-            if (searchBar) {
-                searchBar.classList.add("icons");
-            }
-
-            menuToggle.addEventListener('click', function (event) {
-                if (menuOpen) {
-                    menu.classList.remove('active');
-                } else {
-                    menu.classList.add('active');
-                }
-                menuOpen = !menuOpen;
-                event.stopPropagation();
-            });
-
-            document.addEventListener('click', function (event) {
-        // Проверка на размер экрана
-        if (window.innerWidth <= 800) {
-            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                menu.classList.remove('active');
-                menuOpen = false;
-            }
-            if (!searchBar.contains(event.target) && event.target !== document.querySelector('.search')) {
-                searchBar.style.display = 'none';
-                searchOpen = false;
-            }
-            if (!cart.contains(event.target) && event.target !== document.querySelector('.cart-icon')) {
-                cart.style.display = 'none';
-                cartOpen = false;
-            }
-            if (!heart.contains(event.target) && event.target !== document.querySelector('.heart')) {
-                heart.classList.remove('active');
-            }
-            if (!account.contains(event.target) && event.target !== document.querySelector('.account')) {
-                account.classList.remove('active');
-            }
-        }
-    });
-
-            document.querySelector('.search').addEventListener('click', function (event) {
-                event.stopPropagation();
-                if (!searchOpen) {
-                    searchBar.style.display = 'block';
-                    searchOpen = true;
-                    if (cartOpen) {
-                        cart.style.display = 'none';
-                        cartOpen = false;
-                    }
-                } else {
-                    searchBar.style.display = 'none';
-                    searchOpen = false;
-                }
-            });
-
-            document.querySelector('.cart-icon').addEventListener('click', function (event) {
-                event.stopPropagation();
-                if (!cartOpen) {
-                    cart.style.display = 'block';
-                    cartOpen = true;
-                    if (searchOpen) {
-                        searchBar.style.display = 'none';
-                        searchOpen = false;
-                    }
-                } else {
-                    cart.style.display = 'none';
-                    cartOpen = false;
-                }
-            });
-
-            heart.addEventListener('click', function (event) {
-                event.stopPropagation();
-                heart.classList.toggle('active');
-            });
-
-            account.addEventListener('click', function (event) {
-                window.location.href = "User.html";
-            });
-        });
+    <script src="brains.js">
     </script>
     </head>
 <body>
@@ -111,15 +19,26 @@
                     <div></div>
                     <div></div>
                 </div>
-            
                 <div class="logo">Nicotine Stars</div>
-            
                 <div class="icons">
                     <div class="search">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                         </svg>
                     </div>
+                    <div class="search_large">
+                        <form action="#" method="get" role="search" class="search-modal__form" id="search-form">
+                            <div class="field">
+                                <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search..." role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                                <input type="hidden" name="options[prefix]" value="last">
+                                <button type="submit" class="search__button field__button" aria-label="Search...">
+                                    <img src="https://cdn.shopify.com/s/files/1/0579/2156/8960/files/search.png" alt="search icon">
+                                </button>
+                            </div>
+                        </form>
+                        <ul id="predictive-search-results-list" class="search-results-list"></ul>
+                    </div>
+                    
                     <div class="cart-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
                               <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
@@ -143,7 +62,6 @@
                                             <ul class="tmenu_nav">
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
                                                     <a role="button" href="javascript:;" target="_self" title="<strong>VALENTĪNA DIENA</strong>" aria-expanded="false" class="tmenu_item_link">
-                                                        <!----><!---->
                                                         <span class="tmenu_item_text">
                                                             <strong>SNUS</strong>
                                                         </span>
@@ -154,11 +72,11 @@
                                                                     </path>
                                                                 </svg>
                                                             </span>
-                                                        </span><!---->
-                                                    </a><!---->
+                                                        </span>
+                                                    </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="/collections/jaunums" target="_self" title="<strong>JAUNUMS</strong>" aria-expanded="false" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="/collections/jaunums" target="_self" title="<strong>JAUNUMS</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>LIQUID</strong>
                                                         </span>
@@ -169,11 +87,11 @@
                                                                     </path>
                                                                 </svg>
                                                             </span>
-                                                        </span><!---->
-                                                    </a><!---->
+                                                        </span>
+                                                    </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-                                                    <a role="button" href="/collections/aproces" target="_self" title="<strong>APROCES</strong>" aria-expanded="false" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="/collections/aproces" target="_self" title="<strong>APROCES</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>DISPOSABLE VAPE</strong>
                                                         </span>
@@ -184,61 +102,56 @@
                                                                     </path>
                                                                 </svg>
                                                             </span>
-                                                        </span><!---->
-                                                    </a><!---->
-                                                </li><!---->
+                                                        </span>
+                                                    </a>
+                                                </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-                                                    <a role="button" href="/collections/gredzeni" target="_self" title="<strong>GREDZENI</strong>" aria-expanded="false" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="/collections/gredzeni" target="_self" title="<strong>GREDZENI</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>BEST SELLERS</strong>
                                                         </span> 
-                                                    </a><!---->
-                                                </li><!---->
+                                                    </a>
+                                                </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-                                                    <a role="button" href="/collections/visas-kaklarotas" target="_self" title="<strong>KAKLAROTAS UN PIEKARIŅI</strong>" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="/collections/visas-kaklarotas" target="_self" title="<strong>KAKLAROTAS UN PIEKARIŅI</strong>" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>SALES</strong>
-                                                        </span><!----><!---->
-                                                    </a><!---->
-                                                </li><!---->
+                                                        </span>
+                                                    </a>
+                                                </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-                                                    <a role="button" href="/collections/auskari" target="_self" title="<strong>AUSKARI</strong>" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="/collections/auskari" target="_self" title="<strong>AUSKARI</strong>" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>FEW LEFT IN STOCK</strong>
-                                                        </span><!----><!---->
-                                                    </a><!---->
-                                                </li><!---->
+                                                        </span>
+                                                    </a>
+                                                </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
                                                     <a role="button" href="/pages/collections-collections" target="_self" title="<strong>KOLEKCIJAS</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>INFO</strong>
                                                         </span>
-                                                    </a><!---->
+                                                    </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="javascript:;" target="_self" title="<strong>DĀVANAS</strong>" aria-expanded="false" class="tmenu_item_link"><!----><!---->
+                                                    <a role="button" href="javascript:;" target="_self" title="<strong>DĀVANAS</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>COMPETITIONS</strong>
                                                         </span>
-                                                        </span><!---->
-                                                    </a><!---->
-                                                </li><!----><!----><!---->
-                                                
+                                                        </span>
+                                                    </a>
+                                                </li>
                                             </ul>
-                                        </nav><!---->
+                                        </nav>
                                     </div>
                                 </nav>
                             </div>
                         </nav>
                     </div>
-                
             </ul>
-            
         <hr class="top_menu_hr" width="100%" size="1">
             </div>
-            
         <hr class="hr_to_skip_on_top" width="100%" size="1">
-        
         </header>
 <div class="sidebar">
     <ul class="">
@@ -323,16 +236,11 @@
                 </span>
             </a>
         </li>
-        
     </ul>
 </div>
     </sticky-header>
-
-    
-
     <input type="text" class="search-bar" placeholder="Search...">
     <div class="cart">Your cart is empty.</div>
-    
     <main>
         <section class="best-sellers">
             <h2 class="text_best_seller">Best Sellers</h2>
@@ -353,7 +261,7 @@
                                         <path fill-rule="evenodd" d="M4.833 6.5a1.667 1.667 0 1 1 3.334 0 1.667 1.667 0 0 1-3.334 0ZM4.05 7H2.5a.5.5 0 0 1 0-1h1.55a2.5 2.5 0 0 1 4.9 0h8.55a.5.5 0 0 1 0 1H8.95a2.5 2.5 0 0 1-4.9 0Zm11.117 6.5a1.667 1.667 0 1 0-3.334 0 1.667 1.667 0 0 0 3.334 0ZM13.5 11a2.5 2.5 0 0 1 2.45 2h1.55a.5.5 0 0 1 0 1h-1.55a2.5 2.5 0 0 1-4.9 0H2.5a.5.5 0 0 1 0-1h8.55a2.5 2.5 0 0 1 2.45-2Z" fill="currentColor">
                                     </svg>
                                 </span>
-                            </span><!---->
+                            </span>
                             <span class="filter_item_text">
                                 <strong>FILTER</strong>
                             </span>
@@ -376,55 +284,59 @@
                 </div>
             </div>
             <div class="grid">
-                <div class="product">
+                <div class="product" data-name="Icebrg Ice Mint" data-aliases="Iceberg, Iceberg Ice Mint" data-price="7">
                     <div class="Snus">
-                        <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
-                            <p>Icebrg Ice mint</p>
-                            <p>7 €</p>
-                            <div class="cart-controls">
-                                <button>-</button>
-                                <span>1</span>
-                                <button>+</button>
-                            </div>
-                            <div class="add_cart">
-                                <button>Add to cart</button>
-                            </div>
+                        <div class="image">
+                            <img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444" alt="Icebrg Ice Mint">
+                        </div>
+                        <p>Icebrg Ice Mint</p>
+                        <p>7 €</p>
+                        <div class="cart-controls">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                        <div class="add_cart">
+                            <button>Add to cart</button>
                         </div>
                     </div>
-                <div class="product">
+                </div>
+                <div class="product" data-name="Cuba Cherry" data-aliases="Cuba, Cuba cherry" data-price="7">
                     <div class="Snus">
-                        <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
-                            <p>Icebrg Ice mint</p>
-                            <p>7 €</p>
-                            <div class="cart-controls">
-                                <button>-</button>
-                                <span>1</span>
-                                <button>+</button>
-                            </div>
-                            <div class="add_cart">
-                                <button>Add to cart</button>
-                            </div>
+                        <div class="image">
+                            <img src="" alt="Cuba Cherry">
+                        </div>
+                        <p>Cuba Cherry</p>
+                        <p>7 €</p>
+                        <div class="cart-controls">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                        <div class="add_cart">
+                            <button>Add to cart</button>
                         </div>
                     </div>
-                <div class="product">
+                </div>
+                <div class="product" data-name="Cuba Black Currant" data-aliases="Cuba, Cuba Black Currant" data-price="7">
                     <div class="Snus">
-                        <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
-                            <p>Icebrg Ice mint</p>
-                            <p>7 €</p>
-                            <div class="cart-controls">
-                                <button>-</button>
-                                <span>1</span>
-                                <button>+</button>
-                            </div>
-                            <div class="add_cart">
-                                <button>Add to cart</button>
-                            </div>
+                        <div class="image">
+                            <img src="" alt="Cuba Black Currantt">
+                        </div>
+                        <p>Cuba Black Currant</p>
+                        <p>7 €</p>
+                        <div class="cart-controls">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                        </div>
+                        <div class="add_cart">
+                            <button>Add to cart</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    
 </body>
 </html>

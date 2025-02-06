@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        .product { margin-bottom: 10px; }
+        .product-info { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Search Results</h1>
+        <form action="result.html" method="get">
+            <input type="search" id="Search-In-Modal" name="q" placeholder="Search..." />
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    
+    <section id="products">
+        <!-- Результаты поиска будут выводиться здесь -->
+    </section>
+
+    <script src="search.js"></script> <!-- Подключаем внешний JS -->
+</body>
+</html>
