@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <style>
-        .product { margin-bottom: 10px; }
-        .product-info { display: flex; justify-content: space-between; }
-    </style>
+    <title>Результаты поиска</title>
+    <script src="loadProducts.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Search Results</h1>
-        <form action="result.html" method="get">
-            <input type="search" id="Search-In-Modal" name="q" placeholder="Search..." />
-            <button type="submit">Search</button>
-        </form>
-    </header>
-    
-    <section id="products">
-        <!-- Результаты поиска будут выводиться здесь -->
-    </section>
+    <h1>Результаты поиска</h1>
+    <div id="results"></div>
 
-    <script src="search.js"></script> <!-- Подключаем внешний JS -->
+    <script>
+        async function displayResults() {
+            const query = new URLSearchParams(window.location.search).get('q');
+            if (!query) {
+                document.getElementById('results').innerHTML = "<p>Нет запроса.</p>";
+                return;
+            }
+
+            const products = await loadProducts();
+            const results = searchProducts(query, products);
+
+            const resultsContainer = document.getElementById('results');
+            if (results.length === 0) {
+                resultsContainer.innerHTML = "<p>Товары не найдены.</p>";
+                return;
+            }
+
+            resultsContainer.innerHTML = results.map(product => `
+                <div class="product">
+                    <img src="${product.img}" alt="${product.name}" />
+                    <p>${product.name}</p>
+                    <p>Цена: ${product.price} €</p>
+                </div>
+            `).join('');
+        }
+
+        displayResults();
+    </script>
 </body>
 </html>

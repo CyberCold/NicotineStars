@@ -91,34 +91,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        const searchForm = document.getElementById('search-form');  // Форма поиска
-        const searchInput = document.getElementById('Search-In-Modal'); // Поле ввода
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('Search-In-Modal');
     
-        // Логируем, что скрипт загружен
-        console.log("Скрипт загружен, готовы к обработке отправки формы!");
+        if (searchForm && searchInput) {
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();  // Останавливаем стандартное поведение формы
     
-        // Код для перенаправления на страницу с результатами поиска
-        searchButton.addEventListener('click', function (event) {
-            event.preventDefault();  // Предотвращаем стандартное поведение формы
-            const query = searchInput.value;  // Получаем запрос из поля
-            if (query) {
-                console.log(`Redirecting to: data/result.html?q=${encodeURIComponent(query)}`);  // Логируем URL
-                window.location.href = `data/result.html?q=${encodeURIComponent(query)}`;
-            }
-        });
-        
+                const query = searchInput.value.trim(); // Убираем пробелы
+                if (query) {
+                    console.log(`Redirecting to: result.html?q=${encodeURIComponent(query)}`);
+                    window.location.href = `/data/result.html?q=${encodeURIComponent(query)}`;
+                } else {
+                    console.log("Пустой запрос. Редирект не выполняется.");
+                }
+            });
+        } else {
+            console.error("Форма или поле поиска не найдены.");
+        }
     });
     
     
     
+    
 
-    // Пример данных для поиска товаров
-    const products = [
-        { id: 1, name: "Icebrg Ice Mint", aliases: "Iceberg, Iceberg Ice Mint", price: 7 },
-        { id: 2, name: "Cuba Cherry", aliases: "Cuba, Cuba cherry", price: 7 },
-        { id: 3, name: "Cuba Black Currant", aliases: "Cuba, Cuba Black Currant", price: 7 }
-    ];
-
+    [
+        { "id": 1, "name": "Icebrg Ice Mint", "aliases": ["Iceberg", "Iceberg Ice Mint"], "price": 7, "img": "iceberg.png" },
+        { "id": 2, "name": "Cuba Cherry", "aliases": ["Cuba", "Cuba cherry"], "price": 7, "img": "cuba_cherry.png" },
+        { "id": 3, "name": "Cuba Black Currant", "aliases": ["Cuba", "Cuba Black Currant"], "price": 7, "img": "cuba_black.png" }
+    ]
+    
     // Функция для отображения результатов поиска
     function displayResults(results) {
         searchResultsList.innerHTML = '';  // Очистить текущие результаты

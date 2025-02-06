@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
-    <script src="brains.js">
-    </script>
+    <script src="brains.js"></script>
+    <script src="loadProducts.js" defer></script>
     </head>
 <body>
     <header>
@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                     <div class="search_large">
-                        <form action="#" method="get" role="search" class="search-modal__form" id="search-form">
+                        <form action="data/result.html" method="get" role="search" class="search-modal__form" id="search-form">
                             <div class="field">
                                 <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search..." role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
                                 <input type="hidden" name="options[prefix]" value="last">
@@ -284,59 +284,31 @@
                 </div>
             </div>
             <div class="grid">
-                <div class="product" data-name="Icebrg Ice Mint" data-aliases="Iceberg, Iceberg Ice Mint" data-price="7">
-                    <div class="Snus">
-                        <div class="image">
-                            <img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444" alt="Icebrg Ice Mint">
-                        </div>
-                        <p>Icebrg Ice Mint</p>
-                        <p>7 €</p>
-                        <div class="cart-controls">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                        <div class="add_cart">
-                            <button>Add to cart</button>
-                        </div>
-                    </div>
+                products
+                <div id="products-list"></div>
+
+    <script>
+        async function displayProducts() {
+            const products = await loadProducts();
+            const productsContainer = document.getElementById('products-list');
+
+            if (products.length === 0) {
+                productsContainer.innerHTML = "<p>Нет доступных товаров.</p>";
+                return;
+            }
+
+            productsContainer.innerHTML = products.map(product => `
+                <div class="product">
+                    <img src="${product.img}" alt="${product.name}" />
+                    <p>${product.name}</p>
+                    <p>Цена: ${product.price} €</p>
+                    <button onclick="window.location.href='result.html?q=${encodeURIComponent(product.name)}'">Искать этот товар</button>
                 </div>
-                <div class="product" data-name="Cuba Cherry" data-aliases="Cuba, Cuba cherry" data-price="7">
-                    <div class="Snus">
-                        <div class="image">
-                            <img src="" alt="Cuba Cherry">
-                        </div>
-                        <p>Cuba Cherry</p>
-                        <p>7 €</p>
-                        <div class="cart-controls">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                        <div class="add_cart">
-                            <button>Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product" data-name="Cuba Black Currant" data-aliases="Cuba, Cuba Black Currant" data-price="7">
-                    <div class="Snus">
-                        <div class="image">
-                            <img src="" alt="Cuba Black Currantt">
-                        </div>
-                        <p>Cuba Black Currant</p>
-                        <p>7 €</p>
-                        <div class="cart-controls">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                        <div class="add_cart">
-                            <button>Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            `).join('');
+        }
+
+        displayProducts();
+    </script>
     </main>
 </body>
 </html>

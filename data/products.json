@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Icebrg Ice Mint",
+        "aliases": ["Iceberg", "Iceberg Ice Mint"],
+        "price": 7,
+        "img": "path_to_image/icebrg_ice_mint.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Cuba Cherry",
+        "aliases": ["Cuba", "Cuba Cherry"],
+        "price": 7,
+        "img": "/visual/snus/cuba_cherry.png"
+    },
+    {
+        "id": 3,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "/visual/snus/cuba_blackcurrant.png"
+    }
+]
