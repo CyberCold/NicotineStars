@@ -9,7 +9,9 @@
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
     <script >
+        
        document.addEventListener('DOMContentLoaded', function () {
+
             const menu = document.querySelector('.sidebar');
             const menuToggle = document.querySelector('.menu-toggle');
             const searchBar = document.querySelector('.search-bar');
@@ -20,6 +22,10 @@
             let menuOpen = false;
             let searchOpen = false;
             let cartOpen = false;
+
+            if (searchBar) {
+                searchBar.classList.add("icons");
+            }
 
             menuToggle.addEventListener('click', function (event) {
                 if (menuOpen) {
@@ -32,26 +38,28 @@
             });
 
             document.addEventListener('click', function (event) {
-                if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                    menu.classList.remove('active');
-                    menuOpen = false;
-                }
-                if (!searchBar.contains(event.target) && event.target !== document.querySelector('.search')) {
-                    searchBar.style.display = 'none';
-                    searchOpen = false;
-                }
-                if (!cart.contains(event.target) && event.target !== document.querySelector('.cart-icon')) {
-                    cart.style.display = 'none';
-                    cartOpen = false;
-                }
-                if (!heart.contains(event.target) && event.target !== document.querySelector('.heart')) {
-                    heart.classList.remove('active');
-                }
-                if (!account.contains(event.target) && event.target !== document.querySelector('.account')) {
-                    account.classList.remove('active');
-                }
-                
-            });
+        // Проверка на размер экрана
+        if (window.innerWidth <= 800) {
+            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                menu.classList.remove('active');
+                menuOpen = false;
+            }
+            if (!searchBar.contains(event.target) && event.target !== document.querySelector('.search')) {
+                searchBar.style.display = 'none';
+                searchOpen = false;
+            }
+            if (!cart.contains(event.target) && event.target !== document.querySelector('.cart-icon')) {
+                cart.style.display = 'none';
+                cartOpen = false;
+            }
+            if (!heart.contains(event.target) && event.target !== document.querySelector('.heart')) {
+                heart.classList.remove('active');
+            }
+            if (!account.contains(event.target) && event.target !== document.querySelector('.account')) {
+                account.classList.remove('active');
+            }
+        }
+    });
 
             document.querySelector('.search').addEventListener('click', function (event) {
                 event.stopPropagation();
