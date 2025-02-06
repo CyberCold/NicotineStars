@@ -161,6 +161,7 @@ a{
 .tmenu_item a {
     display: inline-block;
     text-align: center;
+    text-decoration: none;
 }
 
 .tmenu_item a {
@@ -398,25 +399,32 @@ a{
     .bottom_menu {
         position: fixed;
         margin-left: -55%;
+        top: 6%;
     }
     
     .top-part {
-        position: fixed;
+        position: flex;
         top: 0%;
+        z-index: 10;
     }
     .filters {
         display: none;
     }
     .top_menu_hr {
+        position: fixed;
         width: 100000%;
         height: 130px;
         background: white;
-        margin: -100px -100px;
+        margin: 0px -100px;
         border: 1px solid #ddd;
+        margin-top: -2%;
     }
     .hr_to_skip_on_top{
         margin-top: 5%;
         border: white;
+    }
+    .menu-toggle {
+        display: none;
     }
 }
 
@@ -441,4 +449,3 @@ img {
     height: 100%; 
     object-fit: contain;
 }
-
