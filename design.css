@@ -4,6 +4,11 @@ body {
     padding: 0;
     background: white;
 }
+
+html, body {
+    touch-action: manipulation;
+}
+
 header {
     display: flex;
     justify-content: space-between;
