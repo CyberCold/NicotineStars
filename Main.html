@@ -285,9 +285,41 @@
             </div>
             <div class="grid">
                 products
-                <div id="resultContainer">
+                <div id="productList"></div>
 
-                </div>
+    <script>
+        let products = []; // Декларируем переменную для хранения продуктов
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('/data/products.json'); // Путь к файлу с продуктами
+                if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+                products = await response.json(); // Загружаем список продуктов
+                displayProducts(); // Отображаем их на странице
+            } catch (error) {
+                console.error('Ошибка загрузки товаров:', error);
+            }
+        }
+
+        // Функция для отображения списка продуктов
+        function displayProducts() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = ''; // Очищаем список перед выводом новых данных
+
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+                productElement.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <p>Цена: ${product.price} руб.</p>
+                    <img src="${product.img}" alt="${product.name}" width="200">
+                `;
+                productList.appendChild(productElement);
+            });
+        }
+
+        loadProducts(); // Загружаем продукты при запуске скрипта
+    </script>
             </div>
     </main>
 </body>
