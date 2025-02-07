@@ -4,10 +4,18 @@ let products = []; // Массив для хранения продуктов
 async function loadProducts() {
     try {
         const response = await fetch('/data/products.json'); // Путь к JSON-файлу
+        console.log('Ответ от сервера:', response);
+        
         if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+        
         products = await response.json();
         console.log('Загружены продукты:', products); // Логируем данные для проверки
-        displayProducts(); // Вызываем функцию отображения данных
+        
+        if (products.length === 0) {
+            console.log('Продукты не были загружены!');
+        } else {
+            displayProducts(); // Вызываем функцию отображения данных
+        }
     } catch (error) {
         console.error('Ошибка загрузки товаров:', error);
     }
@@ -16,6 +24,12 @@ async function loadProducts() {
 // Функция для отображения продуктов
 function displayProducts() {
     const productList = document.getElementById('productList');
+    
+    if (!productList) {
+        console.error('Элемент с id "productList" не найден!');
+        return;
+    }
+    
     productList.innerHTML = ''; // Очищаем список перед выводом новых данных
 
     products.forEach(product => {
