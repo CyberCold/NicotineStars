@@ -28,11 +28,36 @@ async function displayProducts() {
 }
 let products = []; // Декларируем переменную для хранения продуктов
 
+let products = []; // Декларируем переменную для хранения продуктов
+
 async function loadProducts() {
     try {
         const response = await fetch('/data/products.json'); // Указание на путь к файлу
-        if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Ошибка загрузки: ${response.status}`);
+        }
         products = await response.json();
+        console.log("Загруженные товары:", products); // Логируем продукты для проверки
+
+        // Проверяем, есть ли контейнер для вывода товаров
+        const productsContainer = document.getElementById('productsContainer');
+        if (!productsContainer) {
+            throw new Error("Контейнер для товаров не найден");
+        }
+
+        // Очищаем контейнер перед добавлением новых элементов
+        productsContainer.innerHTML = '';
+
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Цена: ${product.price}</p>
+            `;
+            productsContainer.appendChild(productElement);
+        });
+
     } catch (error) {
         console.error('Ошибка загрузки товаров:', error);
     }
