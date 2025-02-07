@@ -1,11 +1,42 @@
 async function loadProducts() {
     try {
-        const response = await fetch('/data/brains.json'); 
-        return await response.json();
+        const response = await fetch('/data/products.json'); // Указание на путь к файлу
+        if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+        products = await response.json();
+        
+        // Здесь добавляем продукты на страницу
+        const productsContainer = document.getElementById('productsContainer'); // контейнер на странице
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Цена: ${product.price}</p>
+            `;
+            productsContainer.appendChild(productElement);
+        });
+
     } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
-        return [];
+        console.error('Ошибка загрузки товаров:', error);
     }
+}
+
+loadProducts(); // Загружаем продукты при запуске скрипта
+
+function search(query) {
+    if (!query) {
+        searchResultsList.innerHTML = '';
+        return;
+    }
+
+    loadProducts().then(products => {
+        const filteredResults = products.filter(item => {
+            return item.name.toLowerCase().includes(query.toLowerCase()) ||
+                   item.aliases.some(alias => alias.toLowerCase().includes(query.toLowerCase()));
+        });
+
+        displayResults(filteredResults);
+    });
 }
 
 function getQueryParam(param) {
