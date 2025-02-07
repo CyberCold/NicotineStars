@@ -29,10 +29,10 @@ async function displayResults() {
     }
 
     const products = await loadProducts();
-    console.log("Загруженные товары:", products);  // Показывает JSON в консоли
+    console.log("Загруженные товары:", products);
 
     const results = searchProducts(query, products);
-    console.log("Результаты поиска:", results);  // Показывает, что нашлось
+    console.log("Результаты поиска:", results);
 
     const resultsContainer = document.getElementById('results');
 

@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
         if (searchForm && searchInput) {
             searchForm.addEventListener('submit', function (event) {
-                event.preventDefault();  // Останавливаем стандартное поведение формы
+                event.preventDefault();
     
-                const query = searchInput.value.trim(); // Убираем пробелы
+                const query = searchInput.value.trim();
                 if (query) {
                     console.log(`Redirecting to: result.html?q=${encodeURIComponent(query)}`);
                     window.location.href = `/data/result.html?q=${encodeURIComponent(query)}`;
@@ -121,9 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
         { "id": 3, "name": "Cuba Black Currant", "aliases": ["Cuba", "Cuba Black Currant"], "price": 7, "img": "cuba_black.png" }
     ]
     
-    // Функция для отображения результатов поиска
     function displayResults(results) {
-        searchResultsList.innerHTML = '';  // Очистить текущие результаты
+        searchResultsList.innerHTML = '';
 
         if (results.length === 0) {
             searchResultsList.innerHTML = '<li>No results found</li>';
@@ -132,19 +131,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 const li = document.createElement('li');
                 li.textContent = item.name;
                 li.addEventListener('click', function () {
-                    // При клике на результат, можно выполнить действия, например:
+
                     searchInput.value = item.name;
-                    searchResultsList.innerHTML = '';  // Очистить результаты
+                    searchResultsList.innerHTML = '';
                 });
                 searchResultsList.appendChild(li);
             });
         }
     }
+    
 
-    // Функция для фильтрации данных товаров
     function search(query) {
         if (!query) {
-            searchResultsList.innerHTML = '';  // Если ничего не введено, скрыть результаты
+            searchResultsList.innerHTML = '';
             return;
         }
 
@@ -156,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
         displayResults(filteredResults);
     }
 
-    // Добавление события на ввод в поле поиска
+    
     searchInput.addEventListener('input', function () {
         search(searchInput.value);
     });

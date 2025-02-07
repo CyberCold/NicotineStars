@@ -8,7 +8,7 @@
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
     <script src="brains.js"></script>
-    <script src="loadProducts.js" defer></script>
+    <script src="data/loadProducts.js" defer></script>
     </head>
 <body>
     <header>
@@ -285,30 +285,10 @@
             </div>
             <div class="grid">
                 products
-                <div id="products-list"></div>
+                <div id="products-list">
 
-    <script>
-        async function displayProducts() {
-            const products = await loadProducts();
-            const productsContainer = document.getElementById('products-list');
-
-            if (products.length === 0) {
-                productsContainer.innerHTML = "<p>Нет доступных товаров.</p>";
-                return;
-            }
-
-            productsContainer.innerHTML = products.map(product => `
-                <div class="product">
-                    <img src="${product.img}" alt="${product.name}" />
-                    <p>${product.name}</p>
-                    <p>Цена: ${product.price} €</p>
-                    <button onclick="window.location.href='result.html?q=${encodeURIComponent(product.name)}'">Искать этот товар</button>
                 </div>
-            `).join('');
-        }
-
-        displayProducts();
-    </script>
+            </div>
     </main>
 </body>
 </html>
