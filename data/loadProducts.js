@@ -1,25 +1,37 @@
 let products = []; // Массив для хранения продуктов
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get('search');
 
-// Функция для загрузки продуктов
 async function loadProducts() {
-    try {
-        const response = await fetch('/data/products.json'); // Путь к JSON-файлу
-        console.log('Ответ от сервера:', response);
-        
-        if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
-        
-        products = await response.json();
-        console.log('Загружены продукты:', products); // Логируем данные для проверки
-        
-        if (products.length === 0) {
-            console.log('Продукты не были загружены!');
-        } else {
-            displayProducts(); // Вызываем функцию отображения данных
-        }
-    } catch (error) {
-        console.error('Ошибка загрузки товаров:', error);
-    }
+  try {
+      const response = await fetch('/data/products.json');
+      if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
+      const products = await response.json();
+
+      // Фильтрация по запросу
+      const filteredProducts = products.filter(product => 
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.aliases.some(alias => alias.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+
+      const resultContainer = document.getElementById('resultContainer');
+      filteredProducts.forEach(product => {
+          const productElement = document.createElement('div');
+          productElement.classList.add('product');
+          productElement.innerHTML = `
+              <h2>${product.name}</h2>
+              <p>Цена: ${product.price} руб.</p>
+              <img src="${product.img}" alt="${product.name}" width="200">
+          `;
+          resultContainer.appendChild(productElement);
+      });
+  } catch (error) {
+      console.error('Ошибка загрузки товаров:', error);
+  }
 }
+
+loadProducts(); // Загружаем товары при открытии result.html
+
 
 // Функция для отображения продуктов
 function displayProducts() {
