@@ -24,12 +24,6 @@ async function loadProducts() {
 // Функция для отображения продуктов
 function displayProducts() {
     const productList = document.getElementById('productList');
-    
-    if (!productList) {
-        console.error('Элемент с id "productList" не найден!');
-        return;
-    }
-    
     productList.innerHTML = ''; // Очищаем список перед выводом новых данных
 
     products.forEach(product => {
@@ -41,6 +35,12 @@ function displayProducts() {
             <img src="${product.img}" alt="${product.name}" width="200">
         `;
         productList.appendChild(productElement);
+
+        // Сохраняем продукт в localStorage при выборе
+        productElement.addEventListener('click', () => {
+            localStorage.setItem('selectedProduct', JSON.stringify(product));
+            window.location.href = 'result.html'; // Переход к результатам
+        });
     });
 }
 
