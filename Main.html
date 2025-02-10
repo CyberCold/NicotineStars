@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
-    <script src="brains.js"></script>
+    <script src="brains.js" defer></script>
     <script src="data/loadProducts.js" defer></script>
+    <script src="js/addToCart.js" defer></script>
+    <script src="js/cart.js" defer></script>
     </head>
 <body>
     <header>
@@ -29,21 +31,22 @@
                     <div class="search_large">
                         <form action="data/result.html" method="get" role="search" class="search-modal__form" id="search-form">
                             <div class="field">
-                                <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search..." role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                                <input class="search__input field__input" id="Search-In-Modal" type="search" name="query" placeholder="Search..." autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
                                 <input type="hidden" name="options[prefix]" value="last">
                                 <button type="submit" class="search__button field__button" aria-label="Search...">
                                     <img src="https://cdn.shopify.com/s/files/1/0579/2156/8960/files/search.png" alt="search icon">
                                 </button>
                             </div>
-                        </form>
+                        </form>                        
                         <ul id="predictive-search-results-list" class="search-results-list"></ul>
                     </div>
-                    
-                    <div class="cart-icon">
+                    <div id="cart-icon" class="cart-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                              <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-                       </svg>
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                        </svg>
+                        <span id="cart-count" class="cart-count"></span>
                     </div>
+                    
                     <div class="account">
                         <a href="User.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -151,7 +154,6 @@
             </ul>
         <hr class="top_menu_hr" width="100%" size="1">
             </div>
-        <hr class="hr_to_skip_on_top" width="100%" size="1">
         </header>
 <div class="sidebar">
     <ul class="">
@@ -241,6 +243,8 @@
     </sticky-header>
     <input type="text" class="search-bar" placeholder="Search...">
     <div class="cart">Your cart is empty.</div>
+
+    
     <main>
         <section class="best-sellers">
             <h2 class="text_best_seller">Best Sellers</h2>
@@ -283,44 +287,10 @@
                     </div>
                 </div>
             </div>
-            <div class="grid">
-                products
-                <div id="productList"></div>
-
-    <script>
-        let products = []; // Декларируем переменную для хранения продуктов
-
-        async function loadProducts() {
-            try {
-                const response = await fetch('/data/products.json'); // Путь к файлу с продуктами
-                if (!response.ok) throw new Error(`Ошибка загрузки: ${response.status}`);
-                products = await response.json(); // Загружаем список продуктов
-                displayProducts(); // Отображаем их на странице
-            } catch (error) {
-                console.error('Ошибка загрузки товаров:', error);
-            }
-        }
-
-        // Функция для отображения списка продуктов
-        function displayProducts() {
-            const productList = document.getElementById('productList');
-            productList.innerHTML = ''; // Очищаем список перед выводом новых данных
-
-            products.forEach(product => {
-                const productElement = document.createElement('div');
-                productElement.classList.add('product');
-                productElement.innerHTML = `
-                    <h2>${product.name}</h2>
-                    <p>Цена: ${product.price} руб.</p>
-                    <img src="${product.img}" alt="${product.name}" width="200">
-                `;
-                productList.appendChild(productElement);
-            });
-        }
-
-        loadProducts(); // Загружаем продукты при запуске скрипта
-    </script>
-            </div>
+            
+            
+                <div id="searchResults"></div>
+    <script src="js/main.js" defer></script>
     </main>
 </body>
 </html>

@@ -1,23 +1,65 @@
 [
     {
         "id": 1,
-        "name": "Icebrg Ice Mint",
-        "aliases": ["Iceberg", "Iceberg Ice Mint"],
+        "name": "Icebrg Energy  ",
+        "aliases": ["Iceberg", "Iceberg Energy"],
         "price": 7,
-        "img": "path_to_image/icebrg_ice_mint.jpg"
+        "img": "visual/snus/iceberg/iceberg-energy.png"
     },
     {
         "id": 2,
         "name": "Cuba Cherry",
         "aliases": ["Cuba", "Cuba Cherry"],
         "price": 7,
-        "img": "/visual/snus/cuba_cherry.png"
+        "img": "visual/snus/cuba/cuba-cherry.png"
     },
     {
         "id": 3,
         "name": "Cuba Black Currant",
         "aliases": ["Cuba", "Cuba Black Currant"],
         "price": 7,
-        "img": "/visual/snus/cuba_blackcurrant.png"
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 4,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 5,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 6,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 7,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 8,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
+    },
+    {
+        "id": 9,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png"
     }
 ]
