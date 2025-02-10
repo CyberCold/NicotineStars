@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="eng">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Результаты поиска</title>
+    <title>Nicotine Stars</title>
     <link rel="stylesheet" href="design.css">
 </head>
 <body>
@@ -42,30 +42,35 @@
 
         // Функция для отображения товаров
         function displaySearchResults(products) {
-            const resultContainer = document.getElementById('searchResults');
-            resultContainer.innerHTML = ''; // Очищаем контейнер
+    const resultContainer = document.getElementById('searchResults');
+    resultContainer.innerHTML = ''; // Очищаем контейнер
 
-            if (products.length === 0) {
-                resultContainer.innerHTML = '<p>Товары не найдены.</p>';
-            } else {
-                products.forEach(product => {
-                    const productElement = document.createElement('div');
-                    productElement.classList.add('product');
-                    productElement.innerHTML = `
-                        <div class="product-card">
-                            <a href="product-details.html?id=${product.id}" class="product-link">
-                                <img src="${product.img}" alt="${product.name}" class="product-img" />
-                            </a>
-                            <div class="product-info">
-                                <h3>${product.name}</h3>
-                                <p>Цена: ${product.price} руб.</p>
-                            </div>
-                        </div>
-                    `;
-                    resultContainer.appendChild(productElement);
-                });
-            }
-        }
+    if (products.length === 0) {
+        resultContainer.innerHTML = '<p>Nothing found.</p>';
+    } else {
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+
+
+                <div class="product-card">
+                    <a href="product-details.html?id=${product.id}" class="product-link">
+                        <!-- Указываем путь от корня сайта к папке visual -->
+                        <img src="/${product.img}" alt="${product.name}" class="product-img" />
+                    </a>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>Price: ${product.price} eur.</p>
+                    </div>
+                </div>
+
+
+            `;
+            resultContainer.appendChild(productElement);
+        });
+    }
+}
 
         // Загружаем товары при старте
         loadProducts();

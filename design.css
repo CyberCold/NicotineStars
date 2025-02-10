@@ -161,10 +161,6 @@ a{
     text-decoration: none;
 }
 
-.tmenu_item a {
-    display: inline-block;
-    text-align: center;
-}
 .header__inline-menu {
     padding: 20px;
     position: relative;
@@ -802,3 +798,34 @@ header {
     background-color: black;
     color: white;
   }
+
+  .submenu {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.submenu li a {
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    background-color: #f0f0f0;
+}
+
+.tmenu_item {
+    position: relative;
+}
+
+.tmenu_item_link {
+    display: block;
+}
+
+.tmenu_item_link:hover {
+    cursor: pointer;
+}

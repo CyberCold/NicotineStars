@@ -200,6 +200,11 @@ document.addEventListener('DOMContentLoaded', function () {
             cartOpen = false;
         }
     });
+
+    document.querySelector('.logo').addEventListener('click', function() {
+        window.location.href = 'Main.html'; 
+    });
+
     
     // Функция для обновления содержимого корзины
     function updateCart() {
@@ -241,4 +246,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
+});
+
+// Функция для открытия подменю
+function openSubmenu(menuId) {
+    const submenu = document.getElementById(menuId + '-submenu');
+    if (submenu) {
+        submenu.style.display = 'block';
+    }
+}
+
+// Функция для закрытия подменю
+function closeSubmenu(menuId) {
+    const submenu = document.getElementById(menuId + '-submenu');
+    if (submenu) {
+        submenu.style.display = 'none';
+    }
+}
+
+// Функция для фильтрации продуктов
+function filterProducts(query) {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.value = query; // Устанавливаем значение в поле поиска
+    }
+
+    // Дополнительная логика фильтрации товаров на основе query
+    console.log('Поиск по запросу:', query);
+    // Например, можете добавить логику для отображения отфильтрованных продуктов
+}
+
+// Закрыть подменю при клике вне меню
+document.addEventListener('click', function(event) {
+    const menus = document.querySelectorAll('.submenu');
+    menus.forEach(submenu => {
+        if (!submenu.contains(event.target) && !event.target.closest('.tmenu_item')) {
+            submenu.style.display = 'none';
+        }
+    });
 });

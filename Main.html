@@ -64,80 +64,91 @@
                                         <nav class="tmenu_navbar tmenu_app tmenu_initialized tmenu_transition_none tmenu_alignment_start tmenu_skin_undefined tmenu_app--horizontal">
                                             <ul class="tmenu_nav">
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="javascript:;" target="_self" title="<strong>VALENTĪNA DIENA</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('snus')" onmouseout="closeSubmenu('snus')">
                                                         <span class="tmenu_item_text">
                                                             <strong>SNUS</strong>
                                                         </span>
                                                         <span class="tmenu_indicator">
                                                             <span class="tmenu_indicator_icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                                                                    </path>
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                                                                 </svg>
                                                             </span>
                                                         </span>
                                                     </a>
+                                                    <ul id="snus-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Cuba')">Cuba</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Iceberg')">Iceberg</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Supreme')">Supreme</a></li>
+                                                    </ul>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="/collections/jaunums" target="_self" title="<strong>JAUNUMS</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('liquid')" onmouseout="closeSubmenu('liquid')">
                                                         <span class="tmenu_item_text">
                                                             <strong>LIQUID</strong>
                                                         </span>
                                                         <span class="tmenu_indicator">
                                                             <span class="tmenu_indicator_icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                                                                    </path>
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                                                                 </svg>
                                                             </span>
                                                         </span>
                                                     </a>
+                                                    <ul id="liquid-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+                                                    </ul>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-                                                    <a role="button" href="/collections/aproces" target="_self" title="<strong>APROCES</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('disposablevape')" onmouseout="closeSubmenu('disposablevape')">
                                                         <span class="tmenu_item_text">
                                                             <strong>DISPOSABLE VAPE</strong>
                                                         </span>
                                                         <span class="tmenu_indicator">
                                                             <span class="tmenu_indicator_icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                                                                    </path>
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                                                                 </svg>
                                                             </span>
                                                         </span>
                                                     </a>
+                                                    <ul id="disposablevape-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+                                                    </ul>
                                                 </li>
+                                                
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-                                                    <a role="button" href="/collections/gredzeni" target="_self" title="<strong>GREDZENI</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="/bestsellers" target="_self" title="<strong>BEST SELLERS</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>BEST SELLERS</strong>
                                                         </span> 
                                                     </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-                                                    <a role="button" href="/collections/visas-kaklarotas" target="_self" title="<strong>KAKLAROTAS UN PIEKARIŅI</strong>" class="tmenu_item_link">
+                                                    <a role="button" href="/sales" target="_self" title="<strong>SALES</strong>" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>SALES</strong>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-                                                    <a role="button" href="/collections/auskari" target="_self" title="<strong>AUSKARI</strong>" class="tmenu_item_link">
+                                                    <a role="button" href="/fewleftinstock" target="_self" title="<strong>FEW LEFT IN STOCK</strong>" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>FEW LEFT IN STOCK</strong>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="/pages/collections-collections" target="_self" title="<strong>KOLEKCIJAS</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="/info" target="_self" title="<strong>INFO</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>INFO</strong>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-                                                    <a role="button" href="javascript:;" target="_self" title="<strong>DĀVANAS</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                    <a role="button" href="/competitions" target="_self" title="<strong>COMPETITIONS</strong>" aria-expanded="false" class="tmenu_item_link">
                                                         <span class="tmenu_item_text">
                                                             <strong>COMPETITIONS</strong>
                                                         </span>
@@ -158,7 +169,7 @@
 <div class="sidebar">
     <ul class="">
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="javascript:;" target="_self" title="<strong>VALENTĪNA DIENA</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>SNUS</strong>
                 </span>
@@ -173,7 +184,7 @@
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="/collections/jaunums" target="_self" title="<strong>JAUNUMS</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>LIQUID</strong>
                 </span>
@@ -188,7 +199,7 @@
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-            <a role="button" href="/collections/aproces" target="_self" title="<strong>APROCES</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>DISPOSABLE VAPE</strong>
                 </span>
@@ -203,35 +214,35 @@
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-            <a role="button" href="/collections/gredzeni" target="_self" title="<strong>GREDZENI</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="/bestsellers" target="_self" title="<strong>BEST SELLERS</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>BEST SELLERS</strong>
                 </span> 
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-            <a role="button" href="/collections/visas-kaklarotas" target="_self" title="<strong>KAKLAROTAS UN PIEKARIŅI</strong>" class="tmenu_item_link">
+            <a role="button" href="/sales" target="_self" title="<strong>SALES</strong>" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>SALES</strong>
                 </span>
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
-            <a role="button" href="/collections/auskari" target="_self" title="<strong>AUSKARI</strong>" class="tmenu_item_link">
+            <a role="button" href="/fewleftinstock" target="_self" title="<strong>FEW LEFT IN STOCK</strong>" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>FEW LEFT IN STOCK</strong>
                 </span>
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="/pages/collections-collections" target="_self" title="<strong>KOLEKCIJAS</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="/info" target="_self" title="<strong>INFO</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
                     <strong>INFO</strong>
                 </span>
             </a>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="javascript:;" target="_self" title="<strong>DĀVANAS</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="/competitions" target="_self" title="<strong>COMPETITIONS</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="">
                     <strong>COMPETITIONS</strong>
                 </span>
@@ -243,8 +254,6 @@
     </sticky-header>
     <input type="text" class="search-bar" placeholder="Search...">
     <div class="cart">Your cart is empty.</div>
-
-    
     <main>
         <section class="best-sellers">
             <h2 class="text_best_seller">Best Sellers</h2>
@@ -258,7 +267,7 @@
             <div class="grid">
                 <div class="filters">
                     <div class="FILTER_btn">
-                        <a role="button" href="javascript:;" target="_self" title="<strong>VALENTĪNA DIENA</strong>" aria-expanded="false" class="tmenu_item_link">
+                        <a role="button" href="javascript:;" target="_self" title="<strong>FILTER</strong>" aria-expanded="false" class="tmenu_item_link">
                             <span class="filter_indicator" onclick="togglefFilter()">
                                 <span class="filter_indicator_icon">
                                     <svg class="icon icon-filter" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
@@ -272,7 +281,7 @@
                         </a>
                     </div>
                     <div class="SORT_btn">
-                        <a role="button" href="javascript:;" target="_self" title="<strong>VALENTĪNA DIENA</strong>" aria-expanded="false" class="tmenu_item_link">
+                        <a role="button" href="javascript:;" target="_self" title="<strong>SORT</strong>" aria-expanded="false" class="tmenu_item_link">
                             <span class="filter_item_text">
                                 <strong>SORT</strong>
                             </span>
@@ -287,10 +296,9 @@
                     </div>
                 </div>
             </div>
-            
-            
-                <div id="searchResults"></div>
-    <script src="js/main.js" defer></script>
+            <div id="searchResults"></div>
+        <script src="js/main.js" defer></script>
+        </section>
     </main>
 </body>
 </html>
