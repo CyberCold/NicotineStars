@@ -167,52 +167,63 @@
             </div>
         </header>
 <div class="sidebar">
-    <ul class="">
+    <ul class="mobile">
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('snus')" onmouseout="closeSubmenu('snus')">
                 <span class="tmenu_item_text">
                     <strong>SNUS</strong>
                 </span>
                 <span class="tmenu_indicator">
                     <span class="tmenu_indicator_icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                            </path>
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                         </svg>
                     </span>
                 </span>
             </a>
+            <ul id="snus-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Cuba')">Cuba</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Iceberg')">Iceberg</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Supreme')">Supreme</a></li>
+            </ul>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
-            <a role="button" href="" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('liquid')" onmouseout="closeSubmenu('liquid')">
                 <span class="tmenu_item_text">
                     <strong>LIQUID</strong>
                 </span>
                 <span class="tmenu_indicator">
                     <span class="tmenu_indicator_icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                            </path>
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                         </svg>
                     </span>
                 </span>
             </a>
+            <ul id="liquid-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+            </ul>
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
-            <a role="button" href="" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('disposablevape')" onmouseout="closeSubmenu('disposablevape')">
                 <span class="tmenu_item_text">
                     <strong>DISPOSABLE VAPE</strong>
                 </span>
                 <span class="tmenu_indicator">
                     <span class="tmenu_indicator_icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z">
-                            </path>
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
                         </svg>
                     </span>
                 </span>
             </a>
+            <ul id="disposablevape-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+            </ul>
         </li>
+        
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
             <a role="button" href="/bestsellers" target="_self" title="<strong>BEST SELLERS</strong>" aria-expanded="false" class="tmenu_item_link">
                 <span class="tmenu_item_text">
@@ -243,7 +254,7 @@
         </li>
         <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
             <a role="button" href="/competitions" target="_self" title="<strong>COMPETITIONS</strong>" aria-expanded="false" class="tmenu_item_link">
-                <span class="">
+                <span class="tmenu_item_text">
                     <strong>COMPETITIONS</strong>
                 </span>
                 </span>

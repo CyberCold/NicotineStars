@@ -798,15 +798,24 @@ header {
     background-color: black;
     color: white;
   }
-
   .submenu {
     display: none;
-    list-style-type: none;
-    padding: 0;
     position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10000;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
 }
+
+
 
 .submenu li a {
     padding: 10px;
@@ -821,11 +830,83 @@ header {
 .tmenu_item {
     position: relative;
 }
-
 .tmenu_item_link {
     display: block;
 }
 
 .tmenu_item_link:hover {
     cursor: pointer;
+}
+
+.tmenu_item:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s 0s, opacity 0.2s ease-in-out;
+}
+
+.tmenu_item:hover .submenu,
+.submenu:hover {
+    display: block;
+    opacity: 1;
+}
+
+@media (hover: hover) {
+    .tmenu_item:hover .submenu {
+        display: block;
+        position: absolute;
+        background: white;
+        width: max-content;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .submenu {
+        position: relative;
+        display: none;
+        width: 100%;
+    }
+
+    .submenu.open {
+        display: block;
+    }
+}
+
+.mobile {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 500px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        max-height: 500px;
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+.submenu.open {
+    display: block;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+.submenu.closing {
+    animation: slideUp 0.3s ease-out forwards;
 }
