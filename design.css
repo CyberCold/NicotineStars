@@ -505,6 +505,7 @@ a{
     font-size: 14px;
     width: 14px;
     height: 14px;
+    transition: transform 0.3s ease;
 }
 
 
@@ -803,16 +804,13 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 10px;
     opacity: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    visibility: hidden;
     z-index: 10000;
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    overflow: hidden;
 }
 
 
@@ -902,11 +900,28 @@ header {
     }
 }
 
-.submenu.open {
-    display: block;
-    animation: slideDown 0.3s ease-out forwards;
+
+
+/* Меню по умолчанию скрыто */
+.tmenu_item_has_child .submenu {
+    display: none;
 }
 
-.submenu.closing {
-    animation: slideUp 0.3s ease-out forwards;
+.tmenu_item_has_child.active .submenu {
+    display: block;
+    max-height: 500px; /* Подменю задана максимальная высота, чтобы оно раскрылось */
+}
+
+.tmenu_item_has_child:hover .submenu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.tmenu_item_has_child:hover .tmenu_indicator_icon {
+    transform: rotate(180deg);
+}
+
+li {
+    list-style-type: none;
 }

@@ -251,77 +251,53 @@ document.addEventListener('DOMContentLoaded', function () {
 document.querySelectorAll('.tmenu_item').forEach(item => {
     let timeout;
     item.addEventListener('mouseenter', function() {
-        clearTimeout(timeout); // Очищаем предыдущую задержку
+        clearTimeout(timeout);
         const submenu = this.querySelector('.submenu');
         if (submenu) {
-            submenu.style.display = 'block'; // Показываем подменю
-            submenu.style.opacity = 1; // Плавное появление
-        }
-    });
-
-    item.addEventListener('mouseleave', function() {
-        const submenu = this.querySelector('.submenu');
-        if (submenu) {
-            timeout = setTimeout(() => {
-                submenu.style.opacity = 0; // Плавное исчезновение
-                setTimeout(() => submenu.style.display = 'none', 300); // Скрываем подменю после анимации
-            }, 200); // Задержка перед скрытием меню
+            submenu.style.display = 'block';
+            submenu.style.opacity = 1;
         }
     });
 });
 
 document.querySelectorAll('.submenu').forEach(submenu => {
     submenu.addEventListener('mouseenter', function() {
-        clearTimeout(timeout); // Очищаем задержку, если курсор на подменю
+        clearTimeout(timeout);
         this.style.display = 'block';
         this.style.opacity = 1;
     });
 
-    submenu.addEventListener('mouseleave', function() {
-        timeout = setTimeout(() => {
-            this.style.opacity = 0; // Плавное исчезновение
-            setTimeout(() => this.style.display = 'none', 300); // Скрываем подменю после анимации
-        }, 200); // Задержка перед скрытием подменю
-    });
 });
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const menuItems = document.querySelectorAll(".tmenu_item_link");
+    const menuItems = document.querySelectorAll(".tmenu_item");
 
     menuItems.forEach(item => {
-        item.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation(); // <== Останавливаем всплытие
+        const link = item.querySelector(".tmenu_item_link");
+        const submenu = item.querySelector(".submenu");
 
-            const parent = this.parentElement;
-            const submenu = parent.querySelector(".submenu");
-
+        item.addEventListener("mouseover", function() {
             if (submenu) {
-                if (submenu.classList.contains("open")) {
-                    submenu.classList.remove("open");
-                    submenu.style.display = "none";
-                } else {
-                    // Закрываем все другие открытые меню
-                    document.querySelectorAll(".submenu.open").forEach(openMenu => {
-                        openMenu.classList.remove("open");
-                        openMenu.style.display = "none";
-                    });
+                submenu.style.display = 'block';
+                submenu.style.opacity = '1';
+                submenu.style.visibility = 'visible';
+            }
+        });
 
-                    // Открываем текущее меню
-                    submenu.style.display = "block";
-                    submenu.classList.add("open");
-                }
+        
+        item.addEventListener("mouseout", function() {
+            if (submenu) {
+                submenu.style.opacity = '0';
+                submenu.style.visibility = 'hidden';
             }
         });
     });
-
-    // Закрытие меню при клике вне него
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".tmenu_item")) {
-            document.querySelectorAll(".submenu.open").forEach(openMenu => {
-                openMenu.classList.remove("open");
-                openMenu.style.display = "none";
+    document.addEventListener("click", function(event) {
+        if (!event.target.closest(".sidebar")) {
+            document.querySelectorAll(".submenu").forEach(submenu => {
+                submenu.style.opacity = '0';
+                submenu.style.visibility = 'hidden';
             });
         }
     });
