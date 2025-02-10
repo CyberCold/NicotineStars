@@ -789,3 +789,16 @@ header {
     border: none;
     color: #949292;
   }
+
+  .go-to-delivery {
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background-color: transparent;
+  }
+
+  .go-to-delivery:hover {
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background-color: black;
+    color: white;
+  }
