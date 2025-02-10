@@ -11,6 +11,20 @@
     <script src="data/loadProducts.js" defer></script>
     <script src="js/addToCart.js" defer></script>
     <script src="js/cart.js" defer></script>
+    <script>
+        function filterProducts(brandName) {
+            // Находим поле для поиска
+            var searchInput = document.getElementById('searchInput');
+            
+            // Устанавливаем значение бренда в поле поиска
+            searchInput.value = brandName;
+            
+            // Здесь можно добавить логику для поиска, например, отправить запрос на сервер
+            // или вызвать функцию, которая будет фильтровать товары на странице
+            console.log("Фильтруем по бренду: " + brandName);
+        }
+    </script>
+    
     </head>
 <body>
     <header>

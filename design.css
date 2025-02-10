@@ -804,13 +804,14 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #fff;
+    background-color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     padding: 10px;
     opacity: 0;
     visibility: hidden;
     z-index: 10000;
+    transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
 
@@ -839,7 +840,8 @@ header {
 .tmenu_item:hover .submenu {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s 0s, opacity 0.2s ease-in-out;
+    transition: opacity 0.5s linear;
+    display: block;
 }
 
 .tmenu_item:hover .submenu,
@@ -859,16 +861,19 @@ header {
     }
 }
 
-/* Для мобильных устройств */
 @media (max-width: 768px) {
     .submenu {
-        position: relative;
-        display: none;
-        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+        padding: 0;
+        z-index: 1000000;
     }
 
     .submenu.open {
-        display: block;
+        max-height: 300px; /* Примерное значение, можно менять */
+        padding: 10px 0; /* Добавляем отступы, чтобы не было схлопывания */
+        z-index: 1000000;
     }
 }
 
@@ -918,10 +923,15 @@ header {
     visibility: visible;
 }
 
-.tmenu_item_has_child:hover .tmenu_indicator_icon {
-    transform: rotate(180deg);
-}
-
 li {
     list-style-type: none;
+}
+
+.snus-submenu {
+    color: black;
+}
+
+.submenu.show {
+    opacity: 1;
+    visibility: visible;
 }

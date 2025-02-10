@@ -247,29 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
 });
-
-document.querySelectorAll('.tmenu_item').forEach(item => {
-    let timeout;
-    item.addEventListener('mouseenter', function() {
-        clearTimeout(timeout);
-        const submenu = this.querySelector('.submenu');
-        if (submenu) {
-            submenu.style.display = 'block';
-            submenu.style.opacity = 1;
-        }
-    });
-});
-
-document.querySelectorAll('.submenu').forEach(submenu => {
-    submenu.addEventListener('mouseenter', function() {
-        clearTimeout(timeout);
-        this.style.display = 'block';
-        this.style.opacity = 1;
-    });
-
-});
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const menuItems = document.querySelectorAll(".tmenu_item");
 
@@ -277,27 +254,65 @@ document.addEventListener("DOMContentLoaded", function () {
         const link = item.querySelector(".tmenu_item_link");
         const submenu = item.querySelector(".submenu");
 
-        item.addEventListener("mouseover", function() {
+        let isSubmenuVisible = false;  // Переменная для отслеживания состояния подменю
+
+        item.addEventListener("click", function(e) {
+            e.preventDefault(); // Для предотвращения перехода по ссылке при клике
+
             if (submenu) {
-                submenu.style.display = 'block';
-                submenu.style.opacity = '1';
-                submenu.style.visibility = 'visible';
+                // Если подменю скрыто, показываем его
+                if (!isSubmenuVisible) {
+                    submenu.style.display = 'block';
+                    submenu.style.opacity = '1';
+                    submenu.style.visibility = 'visible';
+                    submenu.classList.add('show'); // Класс для анимации
+                    link.querySelector('.tmenu_item_text').style.transform = 'translateY(-10px)'; // Поднимаем текст
+                    isSubmenuVisible = true;
+                } else {
+                    // Если подменю уже открыто, скрываем его и опускаем текст
+                    submenu.classList.remove('show'); // Убираем анимацию
+                    setTimeout(() => {
+                        submenu.style.opacity = '0';
+                        submenu.style.visibility = 'hidden';
+                        // Поднимаем текст обратно
+                        link.querySelector('.tmenu_item_text').style.transform = 'translateY(0)';
+                    }, 300); // Задержка для анимации
+                    isSubmenuVisible = false;
+                }
             }
         });
 
-        
+        // Обработчик для отображения подменю при наведении
+        item.addEventListener("mouseover", function() {
+            if (!isSubmenuVisible && submenu) {
+                submenu.style.display = 'block';
+                submenu.style.opacity = '1';
+                submenu.style.visibility = 'visible';
+                submenu.classList.add('show');
+            }
+        });
+
+        // Обработчик для скрытия подменю при уходе с области
         item.addEventListener("mouseout", function() {
-            if (submenu) {
-                submenu.style.opacity = '0';
-                submenu.style.visibility = 'hidden';
+            if (!isSubmenuVisible && submenu) {
+                submenu.classList.remove('show');
+                setTimeout(() => {
+                    submenu.style.opacity = '0';
+                    submenu.style.visibility = 'hidden';
+                }, 300); // Задержка для анимации
             }
         });
     });
+
+    // Закрытие всех подменю при клике вне меню
     document.addEventListener("click", function(event) {
-        if (!event.target.closest(".sidebar")) {
+        if (!event.target.closest(".tmenu_item")) {
             document.querySelectorAll(".submenu").forEach(submenu => {
-                submenu.style.opacity = '0';
-                submenu.style.visibility = 'hidden';
+                submenu.classList.remove('show');
+                setTimeout(() => {
+                    submenu.style.opacity = '0';
+                    submenu.style.visibility = 'hidden';
+                }, 300);
             });
         }
     });
