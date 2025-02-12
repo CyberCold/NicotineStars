@@ -404,7 +404,6 @@ a{
         height: calc(100% - 70px);
         background-color: white;
         color: black;
-        transition: left 0.3s ease;
         z-index: 999;
     }
     .sidebar.active {
@@ -505,7 +504,6 @@ a{
     font-size: 14px;
     width: 14px;
     height: 14px;
-    transition: transform 0.3s ease;
 }
 
 
@@ -596,7 +594,6 @@ img {
   width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
   /* Для мобильных экранов до 480px (1 карточка в ряд) */
@@ -649,7 +646,6 @@ header {
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -811,7 +807,6 @@ header {
     opacity: 0;
     visibility: hidden;
     z-index: 10000;
-    transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
 
@@ -840,7 +835,6 @@ header {
 .tmenu_item:hover .submenu {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.5s linear;
     display: block;
 }
 
@@ -865,7 +859,6 @@ header {
     .submenu {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
         padding: 0;
         z-index: 1000000;
     }

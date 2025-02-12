@@ -187,10 +187,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelectorAll('.remove-item').forEach(button => {
                     button.addEventListener('click', function () {
                         let indexToRemove = parseInt(this.getAttribute('data-index'));
-                        cartItems.splice(indexToRemove, 1); // Удаляем товар из массива
-                        localStorage.setItem('cart', JSON.stringify(cartItems)); // Сохраняем обновлённый массив в localStorage
+                        cartItems.splice(indexToRemove, 1);
+                        localStorage.setItem('cart', JSON.stringify(cartItems));
                         
-                        // Обновляем содержимое корзины, но не закрываем её
+                        
                         updateCart();
                     });
                 });
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     
-    // Функция для обновления содержимого корзины
+    
     function updateCart() {
         let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const cartContent = document.querySelector('.cart'); 
@@ -247,73 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
 });
-document.addEventListener("DOMContentLoaded", function () {
-    const menuItems = document.querySelectorAll(".tmenu_item");
 
-    menuItems.forEach(item => {
-        const link = item.querySelector(".tmenu_item_link");
-        const submenu = item.querySelector(".submenu");
 
-        let isSubmenuVisible = false;  // Переменная для отслеживания состояния подменю
 
-        item.addEventListener("click", function(e) {
-            e.preventDefault(); // Для предотвращения перехода по ссылке при клике
-
-            if (submenu) {
-                // Если подменю скрыто, показываем его
-                if (!isSubmenuVisible) {
-                    submenu.style.display = 'block';
-                    submenu.style.opacity = '1';
-                    submenu.style.visibility = 'visible';
-                    submenu.classList.add('show'); // Класс для анимации
-                    link.querySelector('.tmenu_item_text').style.transform = 'translateY(-10px)'; // Поднимаем текст
-                    isSubmenuVisible = true;
-                } else {
-                    // Если подменю уже открыто, скрываем его и опускаем текст
-                    submenu.classList.remove('show'); // Убираем анимацию
-                    setTimeout(() => {
-                        submenu.style.opacity = '0';
-                        submenu.style.visibility = 'hidden';
-                        // Поднимаем текст обратно
-                        link.querySelector('.tmenu_item_text').style.transform = 'translateY(0)';
-                    }, 300); // Задержка для анимации
-                    isSubmenuVisible = false;
-                }
-            }
-        });
-
-        // Обработчик для отображения подменю при наведении
-        item.addEventListener("mouseover", function() {
-            if (!isSubmenuVisible && submenu) {
-                submenu.style.display = 'block';
-                submenu.style.opacity = '1';
-                submenu.style.visibility = 'visible';
-                submenu.classList.add('show');
-            }
-        });
-
-        // Обработчик для скрытия подменю при уходе с области
-        item.addEventListener("mouseout", function() {
-            if (!isSubmenuVisible && submenu) {
-                submenu.classList.remove('show');
-                setTimeout(() => {
-                    submenu.style.opacity = '0';
-                    submenu.style.visibility = 'hidden';
-                }, 300); // Задержка для анимации
-            }
-        });
-    });
-
-    // Закрытие всех подменю при клике вне меню
-    document.addEventListener("click", function(event) {
-        if (!event.target.closest(".tmenu_item")) {
-            document.querySelectorAll(".submenu").forEach(submenu => {
-                submenu.classList.remove('show');
-                setTimeout(() => {
-                    submenu.style.opacity = '0';
-                    submenu.style.visibility = 'hidden';
-                }, 300);
-            });
-        }
-    });
-});
