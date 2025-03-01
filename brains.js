@@ -130,95 +130,79 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const cartIcon = document.querySelector('.cart-icon');
-        const cart = document.querySelector('.cart');
-        let cartOpen = false;
+    document.querySelector('.cart-icon').addEventListener('click', function (event) {
+        event.stopPropagation();
+        if (!cartOpen) {
+            cart.style.display = 'block';  
+            cartOpen = true;
     
-        cartIcon.addEventListener('click', function (event) {
-            event.stopPropagation();
-            if (!cartOpen) {
-                cart.style.display = 'block';
-                cartOpen = true;
-    
-                let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-                console.log("Cart items loaded:", cartItems);
-    
-                updateCart();
-            } else {
-                cart.style.display = 'none';
-                cartOpen = false;
+            if (searchOpen) {
+                searchBar.style.display = 'none'; 
+                searchOpen = false;
             }
-        });
     
-        document.addEventListener('click', function (event) {
-            if (cartOpen && !cart.contains(event.target) && !cartIcon.contains(event.target)) {
-                cart.style.display = 'none';
-                cartOpen = false;
-            }
-        });
-    
-        function updateCart() {
-            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartContent = document.querySelector('.cart');
-            cartContent.innerHTML = '';
-    
-            if (cartItems.length === 0) {
-                cartContent.innerHTML = '<p>Your cart is empty.</p>';
-            } else {
-                let totalPrice = 0;
-    
-                cartItems.forEach((item, index) => {
-                    const productElement = document.createElement('div');
-                    productElement.classList.add('cart-item');
-                    productElement.innerHTML = `
-                        <div class="cart-cart">
-                            <div class="product-image-container">
-                                <img src="${item.img}" alt="${item.name}" class="product-image">
-                            </div>
-                            <div class="product-name">${item.name}</div>
-                            <div class="product-quantity">Count: ${item.quantity}</div>
-                            <div class="product-price">Price: €${item.price}</div>
-                            <button class="remove-item" data-index="${index}">Remove</button>
-                        </div>
-                    `;
-                    cartContent.appendChild(productElement);
-                    totalPrice += item.price * item.quantity;
-                });
-    
-                const totalElement = document.createElement('div');
-                totalElement.classList.add('cart-total');
-                totalElement.innerHTML = `
-                    <div class="total-price-text">Total price:</div>
-                    <div class="total-price">€${totalPrice}</div>
-                    <button class="go-to-delivery">Go to Delivery</button>
-                `;
-                cartContent.appendChild(totalElement);
-    
-                document.querySelector('.go-to-delivery').addEventListener('click', function () {
-                    window.location.href = '/data/delivery.html';
-                });
-    
-                addRemoveListeners(); // Переносим вызов обновления кнопок сюда
-            }
-        }
-    
-        function addRemoveListeners() {
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', function () {
-                    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-                    let indexToRemove = parseInt(this.getAttribute('data-index'));
-    
-                    cartItems.splice(indexToRemove, 1);
-                    localStorage.setItem('cart', JSON.stringify(cartItems));
-    
-                    updateCart(); // Полностью перерисовываем корзину и обновляем кнопки
-                });
-            });
+            updateCart();
+        } else {
+            cart.style.display = 'none';  
+            cartOpen = false;
         }
     });
     
+    // Функция для обновления содержимого корзины
+    function updateCart() {
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartContent = document.querySelector('.cart'); 
+        cartContent.innerHTML = '';
     
+        if (cartItems.length === 0) {
+            cartContent.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            let totalPrice = 0; 
+    
+            cartItems.forEach((item, index) => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('cart-item');
+                productElement.innerHTML = `
+                    <div class="cart-cart">
+                        <div class="product-image-container">
+                            <img src="${item.img}" alt="${item.name}" class="product-image">
+                        </div>
+                        <div class="product-name">${item.name}</div>
+                        <div class="product-quantity">Count: ${item.quantity}</div>
+                        <div class="product-price">Price: €${item.price}</div>
+                        <button class="remove-item" data-index="${index}">Remove</button>
+                    </div>
+                `;
+                cartContent.appendChild(productElement);
+                totalPrice += item.price * item.quantity;
+            });
+    
+            const totalElement = document.createElement('div');
+            totalElement.classList.add('cart-total');
+            totalElement.innerHTML = `
+                <div class="total-price-text">Total price:</div>
+                <div class="total-price">€${totalPrice}</div>
+                <button class="go-to-delivery">Go to Delivery</button>
+            `;
+            cartContent.appendChild(totalElement);
+    
+            document.querySelector('.go-to-delivery').addEventListener('click', function() {
+                window.location.href = '/data/delivery.html'; 
+            });
+    
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function () {
+                    let indexToRemove = parseInt(this.getAttribute('data-index'));
+                    cartItems.splice(indexToRemove, 1); // Удаляем товар из массива
+                    localStorage.setItem('cart', JSON.stringify(cartItems)); // Сохраняем обновлённый массив в localStorage
+    
+                    // Обновляем содержимое корзины, но не закрываем её
+                    updateCart();
+                });
+            });
+        }
+    }
+     
 });
 
 
