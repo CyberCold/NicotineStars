@@ -1,8 +1,139 @@
 <html>
     <head>
-
+        <title>User Account</title>
+        <style>
+            .hidden { display: none; }
+        </style>
     </head>
     <body>
-        <p>Hello</p>>
+        <!-- Регистрация и вход -->
+        <div id="auth-section">
+            <h2>Login or Register</h2>
+
+            <!-- Форма для регистрации -->
+            <div id="register-form">
+                <h3>Register</h3>
+                <input type="email" id="register-email" placeholder="Email" required><br>
+                <input type="password" id="register-password" placeholder="Password" required><br>
+                <button id="register-btn">Register</button>
+            </div>
+
+            <!-- Форма для входа -->
+            <div id="login-form">
+                <h3>Login</h3>
+                <input type="email" id="login-email" placeholder="Email" required><br>
+                <input type="password" id="login-password" placeholder="Password" required><br>
+                <button id="login-btn">Login</button>
+            </div>
+        </div>
+
+        <!-- Информация о пользователе -->
+        <div id="user-info" class="hidden">
+            <h2>Your Account</h2>
+            <div>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>Delivery Address:</strong> <span id="user-address"></span></p>
+                <h3>Recent Orders</h3>
+                <div id="recent-orders">
+                    <!-- Сюда будут подгружаться последние заказы -->
+                </div>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <script>
+            // Функции для регистрации и входа
+            document.getElementById('register-btn').addEventListener('click', function() {
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+
+                // Пример запроса на сервер для регистрации
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('User registered successfully');
+                    // Можно автоматически войти после регистрации
+                    loginUser(email, password);
+                })
+                .catch(error => console.error('Error during registration:', error));
+            });
+
+            document.getElementById('login-btn').addEventListener('click', function() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Вход в аккаунт
+                loginUser(email, password);
+            });
+
+            function loginUser(email, password) {
+                // Пример запроса на сервер для входа
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        localStorage.setItem('userId', data.userId); // Сохраняем ID пользователя в localStorage
+                        displayUserInfo(data.user);
+                    } else {
+                        alert('Invalid credentials');
+                    }
+                })
+                .catch(error => console.error('Error during login:', error));
+            }
+
+            function displayUserInfo(user) {
+                // Скрываем формы регистрации и входа
+                document.getElementById('auth-section').classList.add('hidden');
+                document.getElementById('user-info').classList.remove('hidden');
+                
+                // Отображаем информацию о пользователе
+                document.getElementById('user-email').innerText = user.email;
+                document.getElementById('user-address').innerText = user.address;
+                
+                // Загружаем последние заказы
+                const recentOrders = user.orders || [];
+                const ordersContainer = document.getElementById('recent-orders');
+                if (recentOrders.length === 0) {
+                    ordersContainer.innerHTML = '<p>No recent orders</p>';
+                } else {
+                    recentOrders.forEach(order => {
+                        const orderElement = document.createElement('div');
+                        orderElement.innerHTML = `
+                            <p>Order ID: ${order.id}</p>
+                            <p>Total Price: €${order.totalPrice}</p>
+                            <p>Items: ${order.items.join(', ')}</p>
+                        `;
+                        ordersContainer.appendChild(orderElement);
+                    });
+                }
+            }
+
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('userId'); // Удаляем userId из localStorage
+                document.getElementById('auth-section').classList.remove('hidden');
+                document.getElementById('user-info').classList.add('hidden');
+            });
+
+            // Проверка, если пользователь уже залогинен
+            const userId = localStorage.getItem('userId');
+            if (userId) {
+                fetch(`/get-user-info?userId=${userId}`)
+                    .then(response => response.json())
+                    .then(data => displayUserInfo(data.user))
+                    .catch(error => console.error('Error fetching user info:', error));
+            }
+        </script>
     </body>
 </html>

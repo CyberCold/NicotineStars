@@ -1,0 +1,19 @@
+[
+    {
+        "id": "1628507750000",
+        "email": "test@example.com",
+        "password": "123456",
+        "address": "Some address",
+        "orders": [
+            { "id": "1", "totalPrice": "50", "items": ["item1", "item2"] },
+            { "id": "2", "totalPrice": "20", "items": ["item3"] }
+        ]
+    },
+    {
+        "id": "1628507751234",
+        "email": "user@example.com",
+        "password": "password123", 
+        "address": "Another address",
+        "orders": []
+    }
+]

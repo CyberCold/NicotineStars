@@ -95,40 +95,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Функция для добавления товара в корзину
-    function addToCart(product) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+   // Функция для добавления товара в корзину
+function addToCart(product) {
+    const userId = getUserId(); // Получаем ID пользователя (например, из sessionStorage или cookie)
     
-        // Проверяем, есть ли товар в корзине
-        const existingProductIndex = cart.findIndex(item => item.name === product.name);
-        if (existingProductIndex !== -1) {
-            cart[existingProductIndex].quantity += 1;  // Увеличиваем количество, если товар уже есть
-        } else {
-            cart.push(product);  // Добавляем новый товар
-        }
-    
-        // Сохраняем корзину в localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    
-        console.log("Добавлено в корзину:", product.name);  // Для отладки
-        console.log("Текущая корзина:", cart);  // Для отладки
-    }
-    
-    // Обработчик события для кнопки "Добавить в корзину"
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function() {
-            const product = {
-                name: this.getAttribute('data-name'),
-                price: parseFloat(this.getAttribute('data-price')),
-                quantity: 1,
-                id: this.getAttribute('data-id'),
-                image: this.getAttribute('data-image') // Получаем URL изображения
-            };
-
-            // Добавляем товар в корзину
-            addToCart(product);
-        });
+    // Отправляем данные на сервер
+    fetch('/add-to-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, product })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Ответ от сервера:", data);
+    })
+    .catch(error => {
+        console.error("Ошибка при отправке данных:", error);
     });
+}
+
+// Изменяем обработчик кнопки "Добавить в корзину"
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        const product = {
+            name: this.getAttribute('data-name'),
+            price: parseFloat(this.getAttribute('data-price')),
+            quantity: 1,
+            id: this.getAttribute('data-id'),
+            image: this.getAttribute('data-image')
+        };
+
+        // Добавляем товар в корзину
+        addToCart(product);
+    });
+});
 
     document.querySelector('.cart-icon').addEventListener('click', function (event) {
         event.stopPropagation();
@@ -248,3 +250,66 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+const express = require('express');
+const fs = require('fs');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.post('/add-to-cart', (req, res) => {
+    const { userId, product } = req.body;
+
+    // Чтение данных пользователей из файла
+    fs.readFile('Users.json', 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send("Ошибка при чтении данных");
+        }
+
+        let users = JSON.parse(data);
+        let user = users.find(user => user.id === userId);
+
+        if (user) {
+            // Проверяем, есть ли корзина, если нет - создаём
+            if (!user.cart) {
+                user.cart = [];
+            }
+
+            // Проверяем, есть ли товар в корзине
+            const existingProductIndex = user.cart.findIndex(item => item.id === product.id);
+            if (existingProductIndex !== -1) {
+                user.cart[existingProductIndex].quantity += 1;  // Увеличиваем количество
+            } else {
+                user.cart.push(product);  // Добавляем новый товар
+            }
+
+            // Сохраняем данные пользователей обратно в файл
+            fs.writeFile('Users.json', JSON.stringify(users, null, 2), 'utf8', (err) => {
+                if (err) {
+                    return res.status(500).send("Ошибка при сохранении данных");
+                }
+
+                res.status(200).send("Товар добавлен в корзину");
+            });
+        } else {
+            res.status(404).send("Пользователь не найден");
+        }
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Сервер работает на http://localhost:${port}`);
+});
+
+// Функция для получения корзины пользователя с сервера
+function getCart(userId) {
+    fetch(`/get-cart?userId=${userId}`)
+    .then(response => response.json())
+    .then(data => {
+        // Обновляем корзину на странице, используя данные с сервера
+        updateCart(data.cart);
+    })
+    .catch(error => {
+        console.error("Ошибка при получении данных корзины:", error);
+    });
+}
